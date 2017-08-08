@@ -113,6 +113,7 @@ $(document).ready(function() {
     event.preventDefault();
     // Only allows you to create a user if no 2 current people are playing.
     database.ref().once('value',function(snapshot){
+      console.log(snapshot.child('players').numChildren());
       if (snapshot.child('players').numChildren() < 2){
         // Create user object
         var obj = {
@@ -228,6 +229,7 @@ $(document).ready(function() {
         updateText('','player');
         opponentLoaded = false;
         opponentName = undefined;
+        opponentNumber = undefined;
       }
       else if (snapshot.hasChild(opponentNumber) ){
         if (snapshot.child(opponentNumber).hasChild('choice') && opponentDecide === undefined){
