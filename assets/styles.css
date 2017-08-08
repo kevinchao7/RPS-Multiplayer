@@ -1,0 +1,56 @@
+.card-action p a{
+  margin-right: 0 !important;
+}
+html {
+   font-family: GillSans, Calibri, Trebuchet, sans-serif;
+ }
+ html,body{
+  width: 100vw;
+  overflow-x:hidden;
+  max-height:800px;
+  overflow-y:hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  .chat-history{
+    padding-left:40px !important;
+    max-width:300px !important;
+  }
+  .chat-history-header{
+    padding-left:125px;
+    text-align:left;
+  }
+  html,body{
+    overflow-y:scroll;
+    max-height:inherit;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .chat-history{
+    padding-left:40px !important;
+    max-width:250px !important;
+  }
+  .chat-history-header{
+    padding-left:125px;
+    text-align:left;
+  }
+  html,body{
+    overflow-y:scroll;
+    max-height:inherit;
+  }
+}
+
+.chat-history{
+  text-align:left;
+  padding-left:110px;
+  max-width:350px;
+  text-overflow: ellipsis;
+  word-wrap:break-word;
+}
+.chat-history p{
+  word-wrap:break-word;
+}
+.createUserBtn{
+  font-size:10px;
+}

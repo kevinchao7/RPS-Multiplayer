@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/styles.css">
+  <title>RPS Multiplayer Game</title>
+  <!-- Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div class="container">
+    <h3 class='header center teal-text'>Rock Paper Scissors</h3>
+
+    <div class="row center">
+
+      <div class="row">
+
+        <div class="col s12 m4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span id='player1' class="card-title player1">
+                <form class="col s12">
+                  <div class="row center">
+                    <div class="input-field">
+                      <input placeholder="Enter your username" id='userName' type="text" class="validate" autocomplete="off">
+                    </div>
+                    <button id='createUserBtn' class="createUserBtn btn waves-effect waves-light blue">Create User</button>
+                  </div>
+                </form>
+              </span>
+              <p id='playerScore'>Wins: 0 Losses: 0 Ties: 0</p>
+            </div>
+            <div id='player-options'class="card-action">
+              Loading...
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Status</span>
+              <p id='status' class='status orange-text'>Welcome! Lets play Rock, Paper, Scissors. You can also chat to the other player with the chat button below. You can view chat history with the button on the bottom right corner.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span id='player2' class="card-title player2">Player 2</span>
+              <p id='opponentScore'>Wins: 0 Losses: 0 Ties: 0</p>
+            </div>
+            <div id='player2-card' class="player2-card card-action">
+              Loading...
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field">
+            <input placeholder="Chat" id="keyWord" type="text" class="validate" autocomplete="off">
+          </div>
+          <button id='createBtn' class="createBtn btn waves-effect waves-light blue">Send Message</button>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="row col s6 right-align">
+      <!-- Element Showed -->
+      <a id="menu" class="waves-effect waves-light btn btn-floating"><i class="material-icons"onclick="$('.tap-target').tapTarget('open')">menu</i></a>
+
+      <!-- Tap Target Structure -->
+      <div class="tap-target" data-activates="menu">
+        <div class="tap-target-content">
+          <h5 class='chat-history-header'>Chat History</h5>
+          <div id='chat-history' class="chat-history">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Import jQuery before materialize.js-->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+  <script type="text/javascript" src="assets/Script.js"></script>
+</body>
+
+</html>
