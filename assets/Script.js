@@ -229,7 +229,7 @@ $(document).ready(function() {
         updateText('','player');
         opponentLoaded = false;
         opponentName = undefined;
-        opponentNumber = undefined;
+        // opponentNumber = undefined;
       }
       else if (snapshot.hasChild(opponentNumber) ){
         if (snapshot.child(opponentNumber).hasChild('choice') && opponentDecide === undefined){
