@@ -215,6 +215,10 @@ $(document).ready(function() {
         opponentLoaded = true;
         opponentName = snap[opponentNumber].name;
         sendMessage(opponentName + ' has joined the game.', true, false, 'rounded');
+        opponentWins = snap[opponentNumber].wins;
+        opponentLosses = snap[opponentNumber].losses;
+        opponentTies = snap[opponentNumber].ties;
+        updateScore();
         startGame();
       }
       else if (!snapshot.hasChild(opponentNumber)){
@@ -229,6 +233,10 @@ $(document).ready(function() {
         updateText('','player');
         opponentLoaded = false;
         opponentName = undefined;
+        opponentWins = 0;
+        opponentTies = 0;
+        opponentLosses = 0;
+        updateScore();
         // opponentNumber = undefined;
       }
       else if (snapshot.hasChild(opponentNumber) ){
