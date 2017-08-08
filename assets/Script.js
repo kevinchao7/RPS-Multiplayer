@@ -212,6 +212,7 @@ $(document).ready(function() {
         if (opponentName != undefined){
           sendMessage(opponentName + ' has left the game.', true, false, 'rounded');
         }
+        database.ref().child('players').child(playerNumber).child('choice').remove();
         console.log('Player 2 not here.');
         player2.text('Player 2');
         updateText('Waiting for a new player.','status');
