@@ -44,7 +44,8 @@ $(document).ready(function() {
   var opponentTies = 0;
 
 
-  $('.createBtn').on('click', function(value) {
+  // Send chat
+  $('#sendChat').on('click', function(value) {
     event.preventDefault();
     // Checks if text is in inputfield and limits string size
     if (input.val() != '' && input.val().length < 100 && playerNumber != undefined) {
@@ -52,6 +53,7 @@ $(document).ready(function() {
     } else if (input.val().length > 100) {
       sendMessage('Error: Please enter less than 100 characters at a time.', false,false, 'rounded');
     }
+    input.val('');
   });
 
   function sendMessage(message, boolLogHist, logData, toastShape) {
@@ -61,7 +63,6 @@ $(document).ready(function() {
       var pTag = $('<p>');
       pTag.text(message);
       $('#chat-history').append(pTag);
-      input.val('');
 
       // Load chat to firebase
       var obj = {
@@ -110,39 +111,46 @@ $(document).ready(function() {
   // On Click event for adding users
   $('#createUserBtn').on('click', function() {
     event.preventDefault();
-    // Create user object
-    var obj = {
-      name: $('#userName').val(),
-      wins: 0,
-      losses: 0,
-      ties: 0
-    };
-    $('#player1').text(obj.name);
+    // Only allows you to create a user if no 2 current people are playing.
+    database.ref().once('value',function(snapshot){
+      if (snapshot.child('players').numChildren() < 2){
+        // Create user object
+        var obj = {
+          name: $('#userName').val(),
+          wins: 0,
+          losses: 0,
+          ties: 0
+        };
+        $('#player1').text(obj.name);
 
-    screenName = obj.name;
+        screenName = obj.name;
 
-    // Assigns player number
-    database.ref().child('players').once('value', function(snapshot) {
-      var playerSnap = snapshot.val();
+        // Assigns player number
+        database.ref().child('players').once('value', function(snapshot) {
+          var playerSnap = snapshot.val();
 
-      if (playerSnap === null) {
-        playerNumber = '1';
-        opponentNumber = '2';
-      } else if (playerSnap['1']){
-        playerNumber = '2';
-        opponentNumber = '1';
+          if (playerSnap === null) {
+            playerNumber = '1';
+            opponentNumber = '2';
+          } else if (playerSnap['1']){
+            playerNumber = '2';
+            opponentNumber = '1';
+          }
+          else if (playerSnap['2']){
+            playerNumber = '1';
+            opponentNumber = '2';
+          }
+
+          console.log(screenName+': '+playerNumber + ' Opponent: '+ opponentNumber);
+          addUser(playerNumber, obj);
+          turnOnChatListener();
+          turnOnPlayerListener();
+        });
       }
-      else if (playerSnap['2']){
-        playerNumber = '1';
-        opponentNumber = '2';
+      else{
+        alert('Sorry there are already two players playing the game.');
       }
-
-      console.log(screenName+': '+playerNumber + ' Opponent: '+ opponentNumber);
-      addUser(playerNumber, obj);
-      turnOnChatListener();
-      turnOnPlayerListener();
     });
-
   });
 
   // Push Objects to Firebase
